@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc ../../lib/libopencv_nonfree.a  CMakeFiles/opencv_nonfree.dir/src/nonfree_init.cpp.o CMakeFiles/opencv_nonfree.dir/src/sift.cpp.o CMakeFiles/opencv_nonfree.dir/src/surf.cpp.o CMakeFiles/opencv_nonfree.dir/src/surf_gpu.cpp.o CMakeFiles/opencv_nonfree.dir/src/surf_ocl.cpp.o CMakeFiles/opencv_nonfree.dir/opencl_kernels.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib ../../lib/libopencv_nonfree.a
