@@ -36,7 +36,7 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
         p.getValueTreeState().addParameterListener(paramID, this);
     }
     
-    cap = VideoCapture(0);
+    cap = VideoCapture(1);
     buttonFrame = cv::Mat();
     
     pMOG = new cv::BackgroundSubtractorMOG(200, 5, 0.7, 0);
@@ -80,7 +80,16 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     cap >> frame;
     cv::flip(frame, frame, -1);
     frame(cv::Rect(0,0,100,100)).copyTo(buttonFrame);
-    imshow("buttonFrame", buttonFrame);
+    bool button_detected = buttonDetected(buttonFrame);
+    if (!button_detected){
+        for (int i = 0; i < 40; i++){
+            AudioProcessorParameter* param = processor.getValueTreeState().getParameter(processor.getParamID(i));
+            param->beginChangeGesture();
+            param->setValueNotifyingHost(0.5f);
+            param->endChangeGesture();
+        }
+        return;
+    }
     //update the background model
     pMOG->operator()(frame, fgMaskMOG);
     //imshow("FG Mask MOG 2", fgMaskMOG);
@@ -104,6 +113,9 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     line(frame, cv::Point(frame.cols/2, frame.rows), cv::Point(frame.cols/2, 0), Scalar(0,0,0), 1, 8, 0);
         line(frame, cv::Point(frame.cols/4, frame.rows), cv::Point(frame.cols/4, 0), Scalar(0,0,0), 1, 8, 0);
         line(frame, cv::Point(3*frame.cols/4, frame.rows), cv::Point(3*frame.cols/4, 0), Scalar(0,0,0), 1, 8, 0);
+    line(frame, cv::Point(frame.cols-40, (frame.rows-40)/2), cv::Point(40, (frame.rows - 40)/2), Scalar(1,1,0), 1, 8, 0);
+    line(frame, cv::Point(frame.cols-40, (frame.rows-40)/4), cv::Point(40, (frame.rows - 40)/4), Scalar(1,1,0), 1, 8, 0);
+    
     
     imshow("Original", frame);
     
@@ -159,6 +171,24 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     }
     
     //waitKey(15);
+}
+
+bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
+    int iLowH = 67;
+    int iHighH = 136;
+    
+    int iLowS = 82;
+    int iHighS = 255;
+    
+    int iLowV = 82;
+    int iHighV = 255;
+    Mat imgHSV;
+    cvtColor(img, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
+    Mat imgThresholded;
+    inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
+    if(cv::sum(imgThresholded)[0] > 10)
+        return true;
+    return false;
 }
 
 void AudealizeeqAudioProcessorEditor::resized()
@@ -406,9 +436,9 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
      */
     
     vector<float> finalMidpoints;
-    int delta = 40;
-    int mod40 = int((midpoints.size()-2*delta)/40);
-    for (int i=delta; i < midpoints.size() - delta; i++){
+    int delta_x = 100;
+    int mod40 = int((midpoints.size()-2*delta_x)/40);
+    for (int i=delta_x; i < midpoints.size() - delta_x; i++){
         if (i % mod40 == 0){
             if(midpoints[i].y == 0)
                 finalMidpoints.push_back(0.f);

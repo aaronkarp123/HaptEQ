@@ -44,6 +44,8 @@ public:
     cv::Mat findChainByColor(cv::Mat&);
     cv::Mat getEQPointsMat(cv::Mat&, cv::Mat&);
     
+    bool buttonDetected(cv::Mat&);
+    
     vector<float> getEQPointsVec(cv::Mat&, cv::Mat&);
     
 private:
