@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>15G1004</string>
+	<key>CFBundleDisplayName</key>
+	<string>Sketch-EQ</string>
+	<key>CFBundleExecutable</key>
+	<string>Sketch-EQ</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.InteractiveAudioLab.SketchEQ.SketchEQAUv3</string>
+	<key>CFBundleName</key>
+	<string>Sketch-EQ</string>
+	<key>CFBundlePackageType</key>
+	<string>XPC!</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.1</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>0.0.1</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>8B62</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>16B2649</string>
+	<key>DTSDKName</key>
+	<string>macosx10.12</string>
+	<key>DTXcode</key>
+	<string>0810</string>
+	<key>DTXcodeBuild</key>
+	<string>8B62</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionAttributes</key>
+		<dict>
+			<key>AudioComponents</key>
+			<array>
+				<dict>
+					<key>description</key>
+					<string>Sketch-EQ</string>
+					<key>factoryFunction</key>
+					<string>AudealizeEQAUFactoryAUv3</string>
+					<key>manufacturer</key>
+					<string>IALx</string>
+					<key>name</key>
+					<string>Interactive Audio Lab: Sketch-EQ</string>
+					<key>sandboxSafe</key>
+					<true/>
+					<key>subtype</key>
+					<string>skeq</string>
+					<key>tags</key>
+					<array>
+						<string>Effects</string>
+					</array>
+					<key>type</key>
+					<string>aufx</string>
+					<key>version</key>
+					<integer>1</integer>
+				</dict>
+			</array>
+		</dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.AudioUnit-UI</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>AudealizeEQAUFactoryAUv3</string>
+	</dict>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Northwestern University Interactive Audio Lab</string>
+</dict>
+</plist>

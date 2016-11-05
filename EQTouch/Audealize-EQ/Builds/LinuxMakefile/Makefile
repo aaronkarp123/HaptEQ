@@ -80,7 +80,7 @@ OBJECTS := \
 .PHONY: clean
 
 $(JUCE_OUTDIR)/$(TARGET): check-pkg-config $(OBJECTS) $(RESOURCES)
-	@echo Linking Audealize-EQ
+	@echo Linking Sketch-EQ
 	-@mkdir -p $(JUCE_BINDIR)
 	-@mkdir -p $(JUCE_LIBDIR)
 	-@mkdir -p $(JUCE_OUTDIR)
@@ -91,11 +91,11 @@ check-pkg-config:
 	@pkg-config --print-errors alsa freetype2 libcurl x11 xext xinerama
 
 clean:
-	@echo Cleaning Audealize-EQ
+	@echo Cleaning Sketch-EQ
 	@$(CLEANCMD)
 
 strip:
-	@echo Stripping Audealize-EQ
+	@echo Stripping Sketch-EQ
 	-@$(STRIP) --strip-unneeded $(JUCE_OUTDIR)/$(TARGET)
 
 $(JUCE_OBJDIR)/Biquad_30591a97.o: ../../Source/Biquad.cpp

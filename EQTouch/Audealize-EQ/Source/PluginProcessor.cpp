@@ -125,11 +125,11 @@ bool AudealizeeqAudioProcessor::setPreferredBusArrangement (bool isInput, int bu
     if (numChannels != 1 && numChannels != 2)
         return false;
 
-    if (! AudioProcessor::setPreferredBusArrangement (! isInput, bus, preferredSet))
+    if (! setPreferredBusArrangement (! isInput, bus, preferredSet))
         return false;
    #endif
 
-    return AudioProcessor::setPreferredBusArrangement (isInput, bus, preferredSet);
+    return setPreferredBusArrangement (isInput, bus, preferredSet);
 }
 #endif
 

@@ -80,14 +80,6 @@
  //#define JUCE_USE_ANDROID_OPENSLES
 #endif
 
-#ifndef    JUCE_USE_CDREADER
- //#define JUCE_USE_CDREADER
-#endif
-
-#ifndef    JUCE_USE_CDBURNER
- //#define JUCE_USE_CDBURNER
-#endif
-
 //==============================================================================
 // juce_audio_formats flags:
 
@@ -131,6 +123,17 @@
 
 #ifndef    JUCE_PLUGINHOST_AU
  //#define JUCE_PLUGINHOST_AU
+#endif
+
+//==============================================================================
+// juce_audio_utils flags:
+
+#ifndef    JUCE_USE_CDREADER
+ //#define JUCE_USE_CDREADER
+#endif
+
+#ifndef    JUCE_USE_CDBURNER
+ //#define JUCE_USE_CDBURNER
 #endif
 
 //==============================================================================
@@ -254,10 +257,10 @@
  #define JucePlugin_Build_STANDALONE       1
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "Audealize-EQ"
+ #define JucePlugin_Name                   "Sketch-EQ"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "Audealize-EQ"
+ #define JucePlugin_Desc                   "Sketch-EQ"
 #endif
 #ifndef  JucePlugin_Manufacturer
  #define JucePlugin_Manufacturer           "Interactive Audio Lab"
@@ -272,7 +275,7 @@
  #define JucePlugin_ManufacturerCode       0x49414c78 // 'IALx'
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x61646c7a // 'adlz'
+ #define JucePlugin_PluginCode             0x736b6571 // 'skeq'
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                0
@@ -320,7 +323,7 @@
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.InteractiveAudioLab.AudealizeEQ
+ #define JucePlugin_CFBundleIdentifier     com.InteractiveAudioLab.SketchEQ
 #endif
 #ifndef  JucePlugin_RTASCategory
  #define JucePlugin_RTASCategory           ePlugInCategory_None

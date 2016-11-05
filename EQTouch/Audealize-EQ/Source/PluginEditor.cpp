@@ -79,6 +79,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     cap >> frame;
     cv::flip(frame, frame, -1);
+    //Check button position
     frame(cv::Rect(0,0,100,100)).copyTo(buttonFrame);
     bool button_detected = buttonDetected(buttonFrame);
     if (!button_detected){
@@ -92,15 +93,6 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     }
     //update the background model
     pMOG->operator()(frame, fgMaskMOG);
-    //imshow("FG Mask MOG 2", fgMaskMOG);
-    //Mat edges;
-    //cv::cvtColor(frame, edges, COLOR_BGR2GRAY);
-    /*cv::Mat binaryMat(edges.size(), edges.type());
-     //Calculations with original frame
-     cv::threshold(edges, binaryMat, 100, 255, cv::THRESH_BINARY);
-     GaussianBlur(edges, edges, cv::Size(7,7), 1.5, 1.5);
-     Canny(edges, edges, 0, 30, 3);
-     */
     //Calculations with colorThreshold
     cv::Mat binaryMat = findChainByColor(frame);
     cv::threshold(fgMaskMOG, binaryMat, 100, 255, cv::THRESH_BINARY);
@@ -117,7 +109,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     line(frame, cv::Point(frame.cols-40, (frame.rows-40)/4), cv::Point(40, (frame.rows - 40)/4), Scalar(1,1,0), 1, 8, 0);
     
     
-    imshow("Original", frame);
+    //imshow("Original", frame);
     
     //ArcLength Detection
     vector<vector<cv::Point> > contours;
@@ -126,7 +118,6 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     findContours(fgMaskMOG, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
     double area0 = 0;
     RotatedRect box;
-    //double aspect_ratio;
     for (unsigned int i=0; i<contours.size(); i++){
         // Find the minimum area enclosing bounding box
         box = minAreaRect(contours[i]);
@@ -138,10 +129,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
         if (radius > 400)
             drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
         
-        /*aspect_ratio = float(box.size.width)/box.size.height;
-         if (aspect_ratio > 10 and box.size.area() > 1000)
-         drawContours(arc_contours, contours, i, Scalar(0,0,0), 2, 8);
-         else*/ if (hierarchy[i][3] < 0){
+        if (hierarchy[i][3] < 0){
              area0 = arcLength(contours[i], false);
              //if (area0 > 1800){
              //    drawContours(adjusted_contours, contours, i, Scalar(150,150,0), 2, 8);
