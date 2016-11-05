@@ -37,7 +37,7 @@
 							<key>PATH</key>
 							<string>Research/Summer2016/GraphingPad/EQTouch</string>
 							<key>PATH_TYPE</key>
-							<integer>1</integer>
+							<integer>3</integer>
 							<key>PERMISSIONS</key>
 							<integer>493</integer>
 							<key>TYPE</key>
@@ -390,7 +390,7 @@
 							<key>PATH</key>
 							<string>Research/Summer2016/GraphingPad/opencv-2.4.13</string>
 							<key>PATH_TYPE</key>
-							<integer>1</integer>
+							<integer>3</integer>
 							<key>PERMISSIONS</key>
 							<integer>493</integer>
 							<key>TYPE</key>
@@ -832,6 +832,8 @@
 			</array>
 			<key>NAME</key>
 			<string>Sketch-EQ</string>
+			<key>REFERENCE_FOLDER_PATH</key>
+			<string>/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad</string>
 		</dict>
 	</dict>
 	<key>TYPE</key>
