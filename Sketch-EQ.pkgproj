@@ -31,22 +31,6 @@
 						</dict>
 						<dict>
 							<key>CHILDREN</key>
-							<array/>
-							<key>GID</key>
-							<integer>0</integer>
-							<key>PATH</key>
-							<string>Research/Summer2016/GraphingPad/EQTouch</string>
-							<key>PATH_TYPE</key>
-							<integer>3</integer>
-							<key>PERMISSIONS</key>
-							<integer>493</integer>
-							<key>TYPE</key>
-							<integer>3</integer>
-							<key>UID</key>
-							<integer>0</integer>
-						</dict>
-						<dict>
-							<key>CHILDREN</key>
 							<array>
 								<dict>
 									<key>CHILDREN</key>
@@ -388,9 +372,25 @@
 							<key>GID</key>
 							<integer>0</integer>
 							<key>PATH</key>
-							<string>Research/Summer2016/GraphingPad/opencv-2.4.13</string>
+							<string>/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Builds/MacOSX</string>
 							<key>PATH_TYPE</key>
+							<integer>0</integer>
+							<key>PERMISSIONS</key>
+							<integer>493</integer>
+							<key>TYPE</key>
 							<integer>3</integer>
+							<key>UID</key>
+							<integer>0</integer>
+						</dict>
+						<dict>
+							<key>CHILDREN</key>
+							<array/>
+							<key>GID</key>
+							<integer>0</integer>
+							<key>PATH</key>
+							<string>/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13</string>
+							<key>PATH_TYPE</key>
+							<integer>0</integer>
 							<key>PERMISSIONS</key>
 							<integer>493</integer>
 							<key>TYPE</key>
@@ -495,6 +495,43 @@
 		</dict>
 		<key>PROJECT_PRESENTATION</key>
 		<dict>
+			<key>INSTALLATION TYPE</key>
+			<dict>
+				<key>HIERARCHIES</key>
+				<dict>
+					<key>INSTALLER</key>
+					<dict>
+						<key>LIST</key>
+						<array>
+							<dict>
+								<key>DESCRIPTION</key>
+								<array/>
+								<key>OPTIONS</key>
+								<dict>
+									<key>HIDDEN</key>
+									<false/>
+									<key>STATE</key>
+									<integer>1</integer>
+								</dict>
+								<key>PACKAGE_UUID</key>
+								<string>20E09315-044E-4C75-8D9B-F08269181C33</string>
+								<key>TITLE</key>
+								<array/>
+								<key>TOOLTIP</key>
+								<array/>
+								<key>TYPE</key>
+								<integer>0</integer>
+								<key>UUID</key>
+								<string>86863A81-9388-41A8-9514-475B3A104306</string>
+							</dict>
+						</array>
+						<key>REMOVED</key>
+						<dict/>
+					</dict>
+				</dict>
+				<key>INSTALLATION TYPE</key>
+				<integer>0</integer>
+			</dict>
 			<key>INSTALLATION_STEPS</key>
 			<array>
 				<dict>
@@ -612,40 +649,7 @@
 			<key>PREINSTALL_PATH</key>
 			<dict/>
 			<key>RESOURCES</key>
-			<array>
-				<dict>
-					<key>CHILDREN</key>
-					<array/>
-					<key>GID</key>
-					<integer>0</integer>
-					<key>PATH</key>
-					<string>Research/Summer2016/GraphingPad/EQTouch</string>
-					<key>PATH_TYPE</key>
-					<integer>1</integer>
-					<key>PERMISSIONS</key>
-					<integer>493</integer>
-					<key>TYPE</key>
-					<integer>3</integer>
-					<key>UID</key>
-					<integer>0</integer>
-				</dict>
-				<dict>
-					<key>CHILDREN</key>
-					<array/>
-					<key>GID</key>
-					<integer>0</integer>
-					<key>PATH</key>
-					<string>Research/Summer2016/GraphingPad/opencv-2.4.13</string>
-					<key>PATH_TYPE</key>
-					<integer>1</integer>
-					<key>PERMISSIONS</key>
-					<integer>493</integer>
-					<key>TYPE</key>
-					<integer>3</integer>
-					<key>UID</key>
-					<integer>0</integer>
-				</dict>
-			</array>
+			<array/>
 			<key>ROOT_VOLUME_ONLY</key>
 			<false/>
 		</dict>
@@ -658,9 +662,9 @@
 			<key>BUILD_PATH</key>
 			<dict>
 				<key>PATH</key>
-				<string>../Documents</string>
+				<string>../SketchEQ</string>
 				<key>PATH_TYPE</key>
-				<integer>1</integer>
+				<integer>3</integer>
 			</dict>
 			<key>EXCLUDED_FILES</key>
 			<array>
@@ -833,7 +837,7 @@
 			<key>NAME</key>
 			<string>Sketch-EQ</string>
 			<key>REFERENCE_FOLDER_PATH</key>
-			<string>/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad</string>
+			<string>/Users/aaronkarp/Documents</string>
 		</dict>
 	</dict>
 	<key>TYPE</key>
