@@ -36,7 +36,7 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
         p.getValueTreeState().addParameterListener(paramID, this);
     }
     
-    cap = VideoCapture(1);
+    cap = VideoCapture(0);
     buttonFrame = cv::Mat();
     
     pMOG = new cv::BackgroundSubtractorMOG(200, 5, 0.7, 0);
@@ -76,12 +76,11 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
         return;
     }
     
-    
     cap >> frame;
     cv::flip(frame, frame, -1);
     //Check button position
     frame(cv::Rect(0,0,100,100)).copyTo(buttonFrame);
-    bool button_detected = buttonDetected(buttonFrame);
+    bool button_detected = true;//buttonDetected(buttonFrame);
     if (!button_detected){
         for (int i = 0; i < 40; i++){
             AudioProcessorParameter* param = processor.getValueTreeState().getParameter(processor.getParamID(i));
@@ -98,7 +97,8 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     cv::threshold(fgMaskMOG, binaryMat, 100, 255, cv::THRESH_BINARY);
     GaussianBlur(fgMaskMOG, fgMaskMOG, cv::Size(19,19), 1.5, 1.5);
     Canny(fgMaskMOG, fgMaskMOG, 0, 30, 3);
-    //imshow("Canny", edges);
+    
+    /*
     line(frame, cv::Point(frame.cols, frame.rows/2), cv::Point(0, frame.rows/2), Scalar(0,0,0), 1, 8, 0);
     line(frame, cv::Point(frame.cols, frame.rows/4), cv::Point(0, frame.rows/4), Scalar(0,0,0), 1, 8, 0);
     line(frame, cv::Point(frame.cols, 3*frame.rows/4), cv::Point(0, 3*frame.rows/4), Scalar(0,0,0), 1, 8, 0);
@@ -109,13 +109,14 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     line(frame, cv::Point(frame.cols-40, (frame.rows-40)/4), cv::Point(40, (frame.rows - 40)/4), Scalar(1,1,0), 1, 8, 0);
     
     
-    //imshow("Original", frame);
-    
+    imshow("Original", frame);
+    */
     //ArcLength Detection
     vector<vector<cv::Point> > contours;
     vector<Vec4i> hierarchy;
     Mat adjusted_contours(frame.rows, frame.cols, CV_8UC1, Scalar(255, 255,255));
     findContours(fgMaskMOG, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
+    imshow("Pre-Contours", fgMaskMOG);
     double area0 = 0;
     RotatedRect box;
     for (unsigned int i=0; i<contours.size(); i++){
@@ -131,15 +132,16 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
         
         if (hierarchy[i][3] < 0){
              area0 = arcLength(contours[i], false);
-             //if (area0 > 1800){
-             //    drawContours(adjusted_contours, contours, i, Scalar(150,150,0), 2, 8);
-             //}
+             if (area0 > 400){
+                 
+                 drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
+             }
          }
          else{
              area0 = arcLength(contours[i], true);
-             //if (area0 < 300){
-             //    drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
-             //}
+             if (area0 < 300){
+                 drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
+             }
          }
     }
     
@@ -357,7 +359,7 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
         }
         
         //Detecting vertical interference
-        if (abs(biggestY - smallestY) > 35){
+        if (abs(biggestY - smallestY) > 30){
             num_interfered++;
             if (num_interfered > 600) {
                 vector<float> empty = {};
@@ -365,7 +367,7 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
                 return empty;
             }
             if (previousMidpoints.size() == 0){
-                midpoints.push_back(cv::Point(xVal, 0));
+                midpoints.push_back(cv::Point(xVal, 0.5));
             }
             else
                 midpoints.push_back(previousMidpoints[i]);
@@ -442,7 +444,7 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
         previous_midpoints = {tempVec};
     else
         previous_midpoints.push_front(tempVec);
-    if(previous_midpoints.size() > 2    )  // # of previous midpoints to average together
+    if(previous_midpoints.size() > 3    )  // # of previous midpoints to average together
         previous_midpoints.pop_back();
     return finalMidpoints;
 }

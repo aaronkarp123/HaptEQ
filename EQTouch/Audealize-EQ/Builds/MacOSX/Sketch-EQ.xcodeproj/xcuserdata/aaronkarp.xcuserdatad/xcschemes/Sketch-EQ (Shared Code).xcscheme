@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6147E24959EBB5C3A502A516"
-               BuildableName = "libAudealize-EQ.a"
+               BuildableName = "libSketch-EQ.a"
                BlueprintName = "Sketch-EQ (Shared Code)"
                ReferencedContainer = "container:Sketch-EQ.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6147E24959EBB5C3A502A516"
-            BuildableName = "libAudealize-EQ.a"
+            BuildableName = "libSketch-EQ.a"
             BlueprintName = "Sketch-EQ (Shared Code)"
             ReferencedContainer = "container:Sketch-EQ.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6147E24959EBB5C3A502A516"
-            BuildableName = "libAudealize-EQ.a"
+            BuildableName = "libSketch-EQ.a"
             BlueprintName = "Sketch-EQ (Shared Code)"
             ReferencedContainer = "container:Sketch-EQ.xcodeproj">
          </BuildableReference>

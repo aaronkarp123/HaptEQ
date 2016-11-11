@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D158BB88724CB9584A8BBEBF"
-               BuildableName = "Audealize-EQ.vst3"
+               BuildableName = "Sketch-EQ.vst3"
                BlueprintName = "Sketch-EQ (VST3)"
                ReferencedContainer = "container:Sketch-EQ.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D158BB88724CB9584A8BBEBF"
-            BuildableName = "Audealize-EQ.vst3"
+            BuildableName = "Sketch-EQ.vst3"
             BlueprintName = "Sketch-EQ (VST3)"
             ReferencedContainer = "container:Sketch-EQ.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D158BB88724CB9584A8BBEBF"
-            BuildableName = "Audealize-EQ.vst3"
+            BuildableName = "Sketch-EQ.vst3"
             BlueprintName = "Sketch-EQ (VST3)"
             ReferencedContainer = "container:Sketch-EQ.xcodeproj">
          </BuildableReference>
