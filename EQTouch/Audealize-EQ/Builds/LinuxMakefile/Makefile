@@ -80,7 +80,7 @@ OBJECTS := \
 .PHONY: clean
 
 $(JUCE_OUTDIR)/$(TARGET): check-pkg-config $(OBJECTS) $(RESOURCES)
-	@echo Linking Sketch-EQ
+	@echo Linking HaptEQ
 	-@mkdir -p $(JUCE_BINDIR)
 	-@mkdir -p $(JUCE_LIBDIR)
 	-@mkdir -p $(JUCE_OUTDIR)
@@ -91,11 +91,11 @@ check-pkg-config:
 	@pkg-config --print-errors alsa freetype2 libcurl x11 xext xinerama
 
 clean:
-	@echo Cleaning Sketch-EQ
+	@echo Cleaning HaptEQ
 	@$(CLEANCMD)
 
 strip:
-	@echo Stripping Sketch-EQ
+	@echo Stripping HaptEQ
 	-@$(STRIP) --strip-unneeded $(JUCE_OUTDIR)/$(TARGET)
 
 $(JUCE_OBJDIR)/Biquad_30591a97.o: ../../Source/Biquad.cpp

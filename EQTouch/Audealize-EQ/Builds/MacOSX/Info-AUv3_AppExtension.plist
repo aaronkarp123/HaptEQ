@@ -10,9 +10,9 @@
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleName</key>
-    <string>Sketch-EQ</string>
+    <string>HaptEQ</string>
     <key>CFBundleDisplayName</key>
-    <string>Sketch-EQ</string>
+    <string>HaptEQ</string>
     <key>CFBundlePackageType</key>
     <string>XPC!</string>
     <key>CFBundleSignature</key>
@@ -28,7 +28,7 @@
     <key>NSExtension</key>
     <dict>
       <key>NSExtensionPrincipalClass</key>
-      <string>AudealizeEQAUFactoryAUv3</string>
+      <string>HaptEQAUFactoryAUv3</string>
       <key>NSExtensionPointIdentifier</key>
       <string>com.apple.AudioUnit-UI</string>
       <key>NSExtensionAttributes</key>
@@ -37,17 +37,17 @@
         <array>
           <dict>
             <key>name</key>
-            <string>Interactive Audio Lab: Sketch-EQ</string>
+            <string>Interactive Audio Lab: HaptEQ</string>
             <key>description</key>
-            <string>Sketch-EQ</string>
+            <string>HaptEQ</string>
             <key>factoryFunction</key>
-            <string>AudealizeEQAUFactoryAUv3</string>
+            <string>HaptEQAUFactoryAUv3</string>
             <key>manufacturer</key>
             <string>IALx</string>
             <key>type</key>
             <string>aufx</string>
             <key>subtype</key>
-            <string>skeq</string>
+            <string>hpeq</string>
             <key>version</key>
             <integer>1</integer>
             <key>sandboxSafe</key>

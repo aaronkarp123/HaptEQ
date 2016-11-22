@@ -10,9 +10,9 @@
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleName</key>
-    <string>Sketch-EQ</string>
+    <string>HaptEQ</string>
     <key>CFBundleDisplayName</key>
-    <string>Sketch-EQ</string>
+    <string>HaptEQ</string>
     <key>CFBundlePackageType</key>
     <string>BNDL</string>
     <key>CFBundleSignature</key>
@@ -29,17 +29,17 @@
     <array>
       <dict>
         <key>name</key>
-        <string>Interactive Audio Lab: Sketch-EQ</string>
+        <string>Interactive Audio Lab: HaptEQ</string>
         <key>description</key>
-        <string>Sketch-EQ</string>
+        <string>HaptEQ</string>
         <key>factoryFunction</key>
-        <string>AudealizeEQAUFactory</string>
+        <string>HaptEQAUFactory</string>
         <key>manufacturer</key>
         <string>IALx</string>
         <key>type</key>
         <string>aufx</string>
         <key>subtype</key>
-        <string>skeq</string>
+        <string>hpeq</string>
         <key>version</key>
         <integer>1</integer>
       </dict>
