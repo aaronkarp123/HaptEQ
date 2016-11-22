@@ -71,6 +71,8 @@ private:
     
     std::deque<vector<cv::Point>> previous_midpoints;
     
+    std::deque<bool> previousButtons;
+    
     int num_times_run;
     
     TextButton checkTheTimeButton;

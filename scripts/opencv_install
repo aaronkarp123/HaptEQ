@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Installing OpenCV libraries"
+install_name_tool -id @executable_path/../Frameworks libopencv_imgproc.2.4.13.dylib
+install_name_tool -id @executable_path/../Frameworks libopencv_core.2.4.13.dylib
+install_name_tool -id @executable_path/../Frameworks libopencv_highgui.2.4.13.dylib
+install_name_tool -id @executable_path/../Frameworks libopencv_video.2.4.13.dylib
+install_name_tool -id @executable_path/../Frameworks libopencv_legacy.2.4.13.dylib
+echo "All done installing opencv libraries"
+
