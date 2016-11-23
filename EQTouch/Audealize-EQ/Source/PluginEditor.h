@@ -75,6 +75,10 @@ private:
     
     int num_times_run;
     
+    String filename = "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad";
+    
+    cv::VideoWriter outCapture;
+    
     TextButton checkTheTimeButton;
     Label timeLabel;
 };

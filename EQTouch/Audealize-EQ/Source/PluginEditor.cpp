@@ -53,6 +53,8 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
     
     previousButtons = {};
     
+    //outCapture = cv::VideoWriter(filename, CV_FOURCC('M','J','P','G'), 30, cv::Size(1989,1680));
+    
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 200);
@@ -80,18 +82,19 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     cv::Mat tempframe;
     cap >> tempframe;
+    cout << "Height " << tempframe.rows << "  Width " << tempframe.cols << endl;
     cv::flip(tempframe, tempframe, -1);
     //Check button position
     frame = tempframe(cv::Rect(100, 120, tempframe.cols - 100, tempframe.rows - 120));
-    frame(cv::Rect(frame.cols-250,frame.rows-70,60,60)).copyTo(buttonFrame);
-    //imshow("Original", frame);
-    imshow("Button", buttonFrame);
+    frame(cv::Rect(frame.cols-260,frame.rows-80,60,60)).copyTo(buttonFrame);
+    imshow("Captured Image", frame);
+    //imshow("Button", buttonFrame);
     bool button_detected = buttonDetected(buttonFrame);
     if (previousButtons.size() == 0)
         previousButtons = {button_detected};
     else
         previousButtons.push_front(button_detected);
-    if(previousButtons.size() > 4    )  // # of previous midpoints to average together
+    if(previousButtons.size() > 7)  // # of previous buttons to average together
         previousButtons.pop_back();
     double buttonAvg = 0;
     for (int i = 0; i < previousButtons.size(); i++){
@@ -132,14 +135,14 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     
     
-    imshow("Original", frame);
+    //imshow("Original", frame);
     
     //ArcLength Detection
     vector<vector<cv::Point> > contours;
     vector<Vec4i> hierarchy;
     Mat adjusted_contours(frame.rows, frame.cols, CV_8UC1, Scalar(255, 255,255));
     findContours(fgMaskMOG, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
-    imshow("Pre-Contours", fgMaskMOG);
+    //imshow("Pre-Contours", fgMaskMOG);
     double area0 = 0;
     RotatedRect box;
     for (unsigned int i=0; i<contours.size(); i++){
@@ -183,7 +186,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
          }
     }
     
-    imshow("adjusted_contours", adjusted_contours);
+    //imshow("adjusted_contours", adjusted_contours);
     vector<float> midpointVec = getEQPointsVec(adjusted_contours, frame);
     if (midpointVec.size() <= 0){
         cout << "No Midpoints" << endl;
@@ -214,7 +217,7 @@ bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
     cvtColor(img, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
     Mat imgThresholded;
     inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
-    if(cv::sum(imgThresholded)[0] > 10)
+    if(cv::sum(imgThresholded)[0] > 30)
         return true;
     iLowH = 120;
     iHighH = 179;
@@ -237,7 +240,7 @@ bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
     GaussianBlur(img, img, cv::Size(19,19), 1.5, 1.5);
     Canny(img, img, 0, 30, 3);
     findContours(img, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
-    imshow("buttomCanny", img);
+    //imshow("buttomCanny", img);
     double area0 = 0;
     for (unsigned int i=0; i<contours.size(); i++){
         Point2f center;
