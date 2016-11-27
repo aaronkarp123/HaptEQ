@@ -19,7 +19,7 @@
 #include <deque>
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
-
+#include "LookAndFeel.h"
 
 
 //==============================================================================
@@ -81,6 +81,8 @@ private:
     
     TextButton checkTheTimeButton;
     Label timeLabel;
+    
+    Audealize::AudealizeLookAndFeelDark lookAndFeel;
 };
 
 

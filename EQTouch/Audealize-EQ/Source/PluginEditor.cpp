@@ -28,14 +28,14 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
     for (int i = 0; i < NUMBANDS; i++){
         juce::String paramID = "paramGain"+std::to_string(i);
         
-        mGainSliders[i] = new Slider (Slider::LinearVertical, Slider::TextBoxBelow);
+        mGainSliders[i] = new Slider (Slider::LinearVertical, Slider::NoTextBox);
         addAndMakeVisible(mGainSliders[i]);
-        
         mGainSliderAttachment[i] = new AudioProcessorValueTreeState::SliderAttachment (p.getValueTreeState(), paramID, *mGainSliders[i]);
         
         p.getValueTreeState().addParameterListener(paramID, this);
     }
-    
+    LookAndFeel::setDefaultLookAndFeel (&lookAndFeel);
+
     cap = VideoCapture(1);
     buttonFrame = cv::Mat();
     
@@ -57,7 +57,7 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
     
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 200);
+    setSize (800, 200);
 }
 
 AudealizeeqAudioProcessorEditor::~AudealizeeqAudioProcessorEditor()
@@ -71,7 +71,7 @@ AudealizeeqAudioProcessorEditor::~AudealizeeqAudioProcessorEditor()
 //==============================================================================
 void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::white);
+    g.fillAll (Colour(0xff2f2f2f));
     
     g.setColour (Colours::white);
     
@@ -263,11 +263,16 @@ void AudealizeeqAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    int border = 15;
+    int spacing = 3;
     Rectangle<int> box (getLocalBounds());
-    box.setWidth(box.getWidth() / 40.);
+    box.setWidth((box.getWidth() - (2 * border) - (39 * spacing)) / 40.);
+    box.setTop(border);
+    box.setBottom(getBounds().getBottom() - border);
+    box.setX(border);
     for (int i = 0; i < NUMBANDS; i++){
         mGainSliders[i]->setBounds(box);
-        box.setX(box.getRight());
+        box.setX(box.getRight() + spacing);
     }
     
 }
