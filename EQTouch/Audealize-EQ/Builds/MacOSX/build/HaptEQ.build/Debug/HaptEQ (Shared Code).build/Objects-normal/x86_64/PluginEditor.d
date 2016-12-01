@@ -501,4 +501,5 @@ dependencies: \
   /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/Equalizer.h \
   /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/NChannelFilter.h \
   /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/Biquad.h \
-  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/PluginEditor.h
+  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/PluginEditor.h \
+  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/LookAndFeel.h

@@ -82,7 +82,6 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     cv::Mat tempframe;
     cap >> tempframe;
-    cout << "Height " << tempframe.rows << "  Width " << tempframe.cols << endl;
     cv::flip(tempframe, tempframe, -1);
     //Check button position
     frame = tempframe(cv::Rect(100, 120, tempframe.cols - 100, tempframe.rows - 120));
@@ -115,6 +114,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
             param->setValueNotifyingHost(0.5f);
             param->endChangeGesture();
         }
+        cout << "Button Off" << endl;
         return;
     }
     //update the background model
@@ -514,7 +514,7 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
      */
     
     vector<float> finalMidpoints;
-    int delta_x = 160;
+    int delta_x = 165;
     int mod40 = int((midpoints.size()-2*delta_x)/40);
     for (int i=delta_x; i < midpoints.size() - delta_x; i++){
         if (i % mod40 == 0){
