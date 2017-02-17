@@ -36,21 +36,13 @@ set(CMAKE_CXX_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../modules/core/perf"
-  "../modules/video/include"
-  "../modules/calib3d/include"
-  "../modules/features2d/include"
-  "../modules/highgui/include"
-  "../modules/imgproc/include"
-  "../modules/flann/include"
-  "../modules/core/include"
-  "../modules/ts/include"
-  "modules/core"
-  "../modules/core/src"
   "3rdparty/zlib"
   "../3rdparty/zlib"
-  "../modules/dynamicuda/include"
+  "modules/core"
+  "../modules/core/src"
+  "../modules/core/include"
   "."
+  "/usr/local/include/eigen3"
   )
 
 # Targets to which this target links.

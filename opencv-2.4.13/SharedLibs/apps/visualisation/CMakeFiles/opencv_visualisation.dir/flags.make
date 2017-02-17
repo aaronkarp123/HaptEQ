@@ -6,5 +6,5 @@ CXX_FLAGS =    -fsigned-char -W -Werror=return-type -Werror=address -Werror=sequ
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/imgproc/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/highgui/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/core/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/include/opencv -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/apps/visualisation -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs 
+CXX_INCLUDES = -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/imgproc/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/highgui/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/modules/core/include -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/include/opencv -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/apps/visualisation -I/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs -isystem /usr/local/include/eigen3 
 

@@ -57,6 +57,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(JUCE_OBJDIR)/LookAndFeel_40552bdf.o \
   $(JUCE_OBJDIR)/Biquad_30591a97.o \
   $(JUCE_OBJDIR)/PluginProcessor_a059e380.o \
   $(JUCE_OBJDIR)/PluginEditor_94d4fb09.o \
@@ -97,6 +98,11 @@ clean:
 strip:
 	@echo Stripping HaptEQ
 	-@$(STRIP) --strip-unneeded $(JUCE_OUTDIR)/$(TARGET)
+
+$(JUCE_OBJDIR)/LookAndFeel_40552bdf.o: ../../Source/LookAndFeel.cpp
+	-@mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling LookAndFeel.cpp"
+	@$(CXX) $(JUCE_CXXFLAGS) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/Biquad_30591a97.o: ../../Source/Biquad.cpp
 	-@mkdir -p $(JUCE_OBJDIR)

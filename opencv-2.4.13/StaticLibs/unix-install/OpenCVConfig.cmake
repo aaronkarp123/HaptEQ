@@ -146,7 +146,7 @@ SET(OpenCV_VERSION_TWEAK  0)
 # Link libraries: e.g. opencv_core;opencv_imgproc; etc...
 # ====================================================================
 
-SET(OpenCV_LIB_COMPONENTS opencv_core;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_ml;opencv_video;opencv_legacy;opencv_objdetect;opencv_photo;opencv_gpu;opencv_videostab;opencv_ts;opencv_ocl;opencv_superres;opencv_nonfree;opencv_stitching;opencv_contrib)
+SET(OpenCV_LIB_COMPONENTS opencv_core;opencv_imgproc;opencv_video;opencv_highgui)
 
 # ==============================================================
 #  Extra include directories, needed by OpenCV 2 new structure

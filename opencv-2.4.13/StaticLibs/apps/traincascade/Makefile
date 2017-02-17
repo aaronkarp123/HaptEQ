@@ -103,7 +103,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\" \"python\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -187,237 +187,6 @@ depend:
 	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-apps/traincascade/CMakeFiles/opencv_traincascade.dir/rule:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f CMakeFiles/Makefile2 apps/traincascade/CMakeFiles/opencv_traincascade.dir/rule
-.PHONY : apps/traincascade/CMakeFiles/opencv_traincascade.dir/rule
-
-# Convenience name for target.
-opencv_traincascade: apps/traincascade/CMakeFiles/opencv_traincascade.dir/rule
-
-.PHONY : opencv_traincascade
-
-# fast build rule for target.
-opencv_traincascade/fast:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/build
-.PHONY : opencv_traincascade/fast
-
-HOGfeatures.o: HOGfeatures.cpp.o
-
-.PHONY : HOGfeatures.o
-
-# target to build an object file
-HOGfeatures.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/HOGfeatures.cpp.o
-.PHONY : HOGfeatures.cpp.o
-
-HOGfeatures.i: HOGfeatures.cpp.i
-
-.PHONY : HOGfeatures.i
-
-# target to preprocess a source file
-HOGfeatures.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/HOGfeatures.cpp.i
-.PHONY : HOGfeatures.cpp.i
-
-HOGfeatures.s: HOGfeatures.cpp.s
-
-.PHONY : HOGfeatures.s
-
-# target to generate assembly for a file
-HOGfeatures.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/HOGfeatures.cpp.s
-.PHONY : HOGfeatures.cpp.s
-
-boost.o: boost.cpp.o
-
-.PHONY : boost.o
-
-# target to build an object file
-boost.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/boost.cpp.o
-.PHONY : boost.cpp.o
-
-boost.i: boost.cpp.i
-
-.PHONY : boost.i
-
-# target to preprocess a source file
-boost.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/boost.cpp.i
-.PHONY : boost.cpp.i
-
-boost.s: boost.cpp.s
-
-.PHONY : boost.s
-
-# target to generate assembly for a file
-boost.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/boost.cpp.s
-.PHONY : boost.cpp.s
-
-cascadeclassifier.o: cascadeclassifier.cpp.o
-
-.PHONY : cascadeclassifier.o
-
-# target to build an object file
-cascadeclassifier.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/cascadeclassifier.cpp.o
-.PHONY : cascadeclassifier.cpp.o
-
-cascadeclassifier.i: cascadeclassifier.cpp.i
-
-.PHONY : cascadeclassifier.i
-
-# target to preprocess a source file
-cascadeclassifier.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/cascadeclassifier.cpp.i
-.PHONY : cascadeclassifier.cpp.i
-
-cascadeclassifier.s: cascadeclassifier.cpp.s
-
-.PHONY : cascadeclassifier.s
-
-# target to generate assembly for a file
-cascadeclassifier.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/cascadeclassifier.cpp.s
-.PHONY : cascadeclassifier.cpp.s
-
-features.o: features.cpp.o
-
-.PHONY : features.o
-
-# target to build an object file
-features.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/features.cpp.o
-.PHONY : features.cpp.o
-
-features.i: features.cpp.i
-
-.PHONY : features.i
-
-# target to preprocess a source file
-features.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/features.cpp.i
-.PHONY : features.cpp.i
-
-features.s: features.cpp.s
-
-.PHONY : features.s
-
-# target to generate assembly for a file
-features.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/features.cpp.s
-.PHONY : features.cpp.s
-
-haarfeatures.o: haarfeatures.cpp.o
-
-.PHONY : haarfeatures.o
-
-# target to build an object file
-haarfeatures.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/haarfeatures.cpp.o
-.PHONY : haarfeatures.cpp.o
-
-haarfeatures.i: haarfeatures.cpp.i
-
-.PHONY : haarfeatures.i
-
-# target to preprocess a source file
-haarfeatures.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/haarfeatures.cpp.i
-.PHONY : haarfeatures.cpp.i
-
-haarfeatures.s: haarfeatures.cpp.s
-
-.PHONY : haarfeatures.s
-
-# target to generate assembly for a file
-haarfeatures.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/haarfeatures.cpp.s
-.PHONY : haarfeatures.cpp.s
-
-imagestorage.o: imagestorage.cpp.o
-
-.PHONY : imagestorage.o
-
-# target to build an object file
-imagestorage.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/imagestorage.cpp.o
-.PHONY : imagestorage.cpp.o
-
-imagestorage.i: imagestorage.cpp.i
-
-.PHONY : imagestorage.i
-
-# target to preprocess a source file
-imagestorage.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/imagestorage.cpp.i
-.PHONY : imagestorage.cpp.i
-
-imagestorage.s: imagestorage.cpp.s
-
-.PHONY : imagestorage.s
-
-# target to generate assembly for a file
-imagestorage.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/imagestorage.cpp.s
-.PHONY : imagestorage.cpp.s
-
-lbpfeatures.o: lbpfeatures.cpp.o
-
-.PHONY : lbpfeatures.o
-
-# target to build an object file
-lbpfeatures.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/lbpfeatures.cpp.o
-.PHONY : lbpfeatures.cpp.o
-
-lbpfeatures.i: lbpfeatures.cpp.i
-
-.PHONY : lbpfeatures.i
-
-# target to preprocess a source file
-lbpfeatures.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/lbpfeatures.cpp.i
-.PHONY : lbpfeatures.cpp.i
-
-lbpfeatures.s: lbpfeatures.cpp.s
-
-.PHONY : lbpfeatures.s
-
-# target to generate assembly for a file
-lbpfeatures.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/lbpfeatures.cpp.s
-.PHONY : lbpfeatures.cpp.s
-
-traincascade.o: traincascade.cpp.o
-
-.PHONY : traincascade.o
-
-# target to build an object file
-traincascade.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/traincascade.cpp.o
-.PHONY : traincascade.cpp.o
-
-traincascade.i: traincascade.cpp.i
-
-.PHONY : traincascade.i
-
-# target to preprocess a source file
-traincascade.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/traincascade.cpp.i
-.PHONY : traincascade.cpp.i
-
-traincascade.s: traincascade.cpp.s
-
-.PHONY : traincascade.s
-
-# target to generate assembly for a file
-traincascade.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/StaticLibs && $(MAKE) -f apps/traincascade/CMakeFiles/opencv_traincascade.dir/build.make apps/traincascade/CMakeFiles/opencv_traincascade.dir/traincascade.cpp.s
-.PHONY : traincascade.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -425,7 +194,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... opencv_traincascade"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... install"
@@ -434,30 +202,6 @@ help:
 	@echo "... test"
 	@echo "... package_source"
 	@echo "... install/local"
-	@echo "... HOGfeatures.o"
-	@echo "... HOGfeatures.i"
-	@echo "... HOGfeatures.s"
-	@echo "... boost.o"
-	@echo "... boost.i"
-	@echo "... boost.s"
-	@echo "... cascadeclassifier.o"
-	@echo "... cascadeclassifier.i"
-	@echo "... cascadeclassifier.s"
-	@echo "... features.o"
-	@echo "... features.i"
-	@echo "... features.s"
-	@echo "... haarfeatures.o"
-	@echo "... haarfeatures.i"
-	@echo "... haarfeatures.s"
-	@echo "... imagestorage.o"
-	@echo "... imagestorage.i"
-	@echo "... imagestorage.s"
-	@echo "... lbpfeatures.o"
-	@echo "... lbpfeatures.i"
-	@echo "... lbpfeatures.s"
-	@echo "... traincascade.o"
-	@echo "... traincascade.i"
-	@echo "... traincascade.s"
 .PHONY : help
 
 

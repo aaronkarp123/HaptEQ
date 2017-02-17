@@ -9,5 +9,5 @@ includedir_new=${prefix}/include
 Name: OpenCV
 Description: Open Source Computer Vision Library
 Version: 2.4.13
-Libs: -L${exec_prefix}/lib -lopencv_contrib -lopencv_stitching -lopencv_nonfree -lopencv_superres -lopencv_ocl -lopencv_ts -lopencv_videostab -lopencv_gpu -lopencv_photo -lopencv_objdetect -lopencv_legacy -lopencv_video -lopencv_ml -lopencv_calib3d -lopencv_features2d -lopencv_highgui -L${exec_prefix}/share/OpenCV/3rdparty/lib -lIlmImf -ljasper -ltiff -lpng -ljpeg -lopencv_imgproc -lopencv_flann -lopencv_core -lzlib -l-framework OpenCL -l-framework AppKit -l-framework QuartzCore -l-framework QTKit -l-framework Cocoa -lstdc++
+Libs: -L${exec_prefix}/lib -lopencv_highgui -L${exec_prefix}/share/OpenCV/3rdparty/lib -lIlmImf -ljasper -ltiff -lpng -ljpeg -lopencv_video -lopencv_imgproc -lopencv_core -lzlib -l-framework AppKit -l-framework QuartzCore -l-framework QTKit -l-framework Cocoa -lstdc++
 Cflags: -I${includedir_old} -I${includedir_new}

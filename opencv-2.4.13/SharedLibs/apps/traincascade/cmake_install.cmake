@@ -27,28 +27,3 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "dev" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/bin/opencv_traincascade")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/opencv_traincascade" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/opencv_traincascade")
-    execute_process(COMMAND "/usr/bin/install_name_tool"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_calib3d.2.4.dylib" "libopencv_calib3d.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_core.2.4.dylib" "libopencv_core.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_features2d.2.4.dylib" "libopencv_features2d.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_flann.2.4.dylib" "libopencv_flann.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_highgui.2.4.dylib" "libopencv_highgui.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_imgproc.2.4.dylib" "libopencv_imgproc.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_legacy.2.4.dylib" "libopencv_legacy.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_ml.2.4.dylib" "libopencv_ml.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_objdetect.2.4.dylib" "libopencv_objdetect.2.4.dylib"
-      -change "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs/lib/libopencv_video.2.4.dylib" "libopencv_video.2.4.dylib"
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/opencv_traincascade")
-    execute_process(COMMAND /usr/bin/install_name_tool
-      -add_rpath "/usr/local/lib"
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/opencv_traincascade")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/opencv_traincascade")
-    endif()
-  endif()
-endif()
-

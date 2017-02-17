@@ -32,17 +32,11 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../modules/highgui/perf"
-  "../modules/video/include"
-  "../modules/calib3d/include"
-  "../modules/features2d/include"
-  "../modules/highgui/include"
   "../modules/imgproc/include"
-  "../modules/flann/include"
   "../modules/core/include"
-  "../modules/ts/include"
   "modules/highgui"
   "../modules/highgui/src"
+  "../modules/highgui/include"
   "../3rdparty/libjasper"
   "3rdparty/libtiff"
   "../3rdparty/libtiff"
@@ -51,6 +45,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "3rdparty/zlib"
   "../3rdparty/zlib"
   "."
+  "/usr/local/include/eigen3"
   "../3rdparty/openexr/Half"
   "../3rdparty/openexr/Iex"
   "../3rdparty/openexr/IlmThread"

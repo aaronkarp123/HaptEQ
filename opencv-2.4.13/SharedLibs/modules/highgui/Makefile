@@ -103,7 +103,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\" \"python\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -188,21 +188,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-modules/highgui/CMakeFiles/opencv_perf_highgui.dir/rule:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f CMakeFiles/Makefile2 modules/highgui/CMakeFiles/opencv_perf_highgui.dir/rule
-.PHONY : modules/highgui/CMakeFiles/opencv_perf_highgui.dir/rule
-
-# Convenience name for target.
-opencv_perf_highgui: modules/highgui/CMakeFiles/opencv_perf_highgui.dir/rule
-
-.PHONY : opencv_perf_highgui
-
-# fast build rule for target.
-opencv_perf_highgui/fast:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build
-.PHONY : opencv_perf_highgui/fast
-
-# Convenience name for target.
 modules/highgui/CMakeFiles/opencv_highgui.dir/rule:
 	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f CMakeFiles/Makefile2 modules/highgui/CMakeFiles/opencv_highgui.dir/rule
 .PHONY : modules/highgui/CMakeFiles/opencv_highgui.dir/rule
@@ -216,87 +201,6 @@ opencv_highgui: modules/highgui/CMakeFiles/opencv_highgui.dir/rule
 opencv_highgui/fast:
 	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_highgui.dir/build
 .PHONY : opencv_highgui/fast
-
-perf/perf_input.o: perf/perf_input.cpp.o
-
-.PHONY : perf/perf_input.o
-
-# target to build an object file
-perf/perf_input.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_input.cpp.o
-.PHONY : perf/perf_input.cpp.o
-
-perf/perf_input.i: perf/perf_input.cpp.i
-
-.PHONY : perf/perf_input.i
-
-# target to preprocess a source file
-perf/perf_input.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_input.cpp.i
-.PHONY : perf/perf_input.cpp.i
-
-perf/perf_input.s: perf/perf_input.cpp.s
-
-.PHONY : perf/perf_input.s
-
-# target to generate assembly for a file
-perf/perf_input.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_input.cpp.s
-.PHONY : perf/perf_input.cpp.s
-
-perf/perf_main.o: perf/perf_main.cpp.o
-
-.PHONY : perf/perf_main.o
-
-# target to build an object file
-perf/perf_main.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_main.cpp.o
-.PHONY : perf/perf_main.cpp.o
-
-perf/perf_main.i: perf/perf_main.cpp.i
-
-.PHONY : perf/perf_main.i
-
-# target to preprocess a source file
-perf/perf_main.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_main.cpp.i
-.PHONY : perf/perf_main.cpp.i
-
-perf/perf_main.s: perf/perf_main.cpp.s
-
-.PHONY : perf/perf_main.s
-
-# target to generate assembly for a file
-perf/perf_main.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_main.cpp.s
-.PHONY : perf/perf_main.cpp.s
-
-perf/perf_output.o: perf/perf_output.cpp.o
-
-.PHONY : perf/perf_output.o
-
-# target to build an object file
-perf/perf_output.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_output.cpp.o
-.PHONY : perf/perf_output.cpp.o
-
-perf/perf_output.i: perf/perf_output.cpp.i
-
-.PHONY : perf/perf_output.i
-
-# target to preprocess a source file
-perf/perf_output.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_output.cpp.i
-.PHONY : perf/perf_output.cpp.i
-
-perf/perf_output.s: perf/perf_output.cpp.s
-
-.PHONY : perf/perf_output.s
-
-# target to generate assembly for a file
-perf/perf_output.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/highgui/CMakeFiles/opencv_perf_highgui.dir/build.make modules/highgui/CMakeFiles/opencv_perf_highgui.dir/perf/perf_output.cpp.s
-.PHONY : perf/perf_output.cpp.s
 
 src/bitstrm.o: src/bitstrm.cpp.o
 
@@ -791,7 +695,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... opencv_perf_highgui"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... install"
@@ -801,15 +704,6 @@ help:
 	@echo "... test"
 	@echo "... package_source"
 	@echo "... install/local"
-	@echo "... perf/perf_input.o"
-	@echo "... perf/perf_input.i"
-	@echo "... perf/perf_input.s"
-	@echo "... perf/perf_main.o"
-	@echo "... perf/perf_main.i"
-	@echo "... perf/perf_main.s"
-	@echo "... perf/perf_output.o"
-	@echo "... perf/perf_output.i"
-	@echo "... perf/perf_output.s"
 	@echo "... src/bitstrm.o"
 	@echo "... src/bitstrm.i"
 	@echo "... src/bitstrm.s"

@@ -12,6 +12,8 @@
               companyName="Northwestern University Interactive Audio Lab" companyWebsite="http://music.eecs.northwestern.edu">
   <MAINGROUP id="zCKhNw" name="HaptEQ">
     <GROUP id="{4E48FC2E-FC0A-72E1-7953-37D9CC5AA9E2}" name="Source">
+      <FILE id="qaxewT" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
+      <FILE id="W5tUGQ" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
       <GROUP id="{2CBA3557-CDDF-A371-3863-FEBC4A174584}" name="Effects">
         <FILE id="N45tfK" name="NChannelFilter.h" compile="0" resource="0"
               file="Source/NChannelFilter.h"/>

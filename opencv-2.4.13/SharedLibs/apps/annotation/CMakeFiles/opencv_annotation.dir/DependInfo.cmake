@@ -16,6 +16,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include/opencv"
   "../apps/annotation"
   "."
+  "/usr/local/include/eigen3"
   )
 
 # Targets to which this target links.

@@ -56,7 +56,7 @@
 /* #undef HAVE_DSHOW */
 
 /* Eigen Matrix & Linear Algebra Library */
-/* #undef HAVE_EIGEN */
+#define HAVE_EIGEN
 
 /* FFMpeg video library */
 /* #undef HAVE_FFMPEG */

@@ -103,7 +103,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\" \"python\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"dev\" \"libs\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -188,21 +188,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-modules/video/CMakeFiles/opencv_perf_video.dir/rule:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f CMakeFiles/Makefile2 modules/video/CMakeFiles/opencv_perf_video.dir/rule
-.PHONY : modules/video/CMakeFiles/opencv_perf_video.dir/rule
-
-# Convenience name for target.
-opencv_perf_video: modules/video/CMakeFiles/opencv_perf_video.dir/rule
-
-.PHONY : opencv_perf_video
-
-# fast build rule for target.
-opencv_perf_video/fast:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/build
-.PHONY : opencv_perf_video/fast
-
-# Convenience name for target.
 modules/video/CMakeFiles/opencv_video.dir/rule:
 	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f CMakeFiles/Makefile2 modules/video/CMakeFiles/opencv_video.dir/rule
 .PHONY : modules/video/CMakeFiles/opencv_video.dir/rule
@@ -216,87 +201,6 @@ opencv_video: modules/video/CMakeFiles/opencv_video.dir/rule
 opencv_video/fast:
 	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_video.dir/build.make modules/video/CMakeFiles/opencv_video.dir/build
 .PHONY : opencv_video/fast
-
-perf/perf_main.o: perf/perf_main.cpp.o
-
-.PHONY : perf/perf_main.o
-
-# target to build an object file
-perf/perf_main.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_main.cpp.o
-.PHONY : perf/perf_main.cpp.o
-
-perf/perf_main.i: perf/perf_main.cpp.i
-
-.PHONY : perf/perf_main.i
-
-# target to preprocess a source file
-perf/perf_main.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_main.cpp.i
-.PHONY : perf/perf_main.cpp.i
-
-perf/perf_main.s: perf/perf_main.cpp.s
-
-.PHONY : perf/perf_main.s
-
-# target to generate assembly for a file
-perf/perf_main.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_main.cpp.s
-.PHONY : perf/perf_main.cpp.s
-
-perf/perf_optflowpyrlk.o: perf/perf_optflowpyrlk.cpp.o
-
-.PHONY : perf/perf_optflowpyrlk.o
-
-# target to build an object file
-perf/perf_optflowpyrlk.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_optflowpyrlk.cpp.o
-.PHONY : perf/perf_optflowpyrlk.cpp.o
-
-perf/perf_optflowpyrlk.i: perf/perf_optflowpyrlk.cpp.i
-
-.PHONY : perf/perf_optflowpyrlk.i
-
-# target to preprocess a source file
-perf/perf_optflowpyrlk.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_optflowpyrlk.cpp.i
-.PHONY : perf/perf_optflowpyrlk.cpp.i
-
-perf/perf_optflowpyrlk.s: perf/perf_optflowpyrlk.cpp.s
-
-.PHONY : perf/perf_optflowpyrlk.s
-
-# target to generate assembly for a file
-perf/perf_optflowpyrlk.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_optflowpyrlk.cpp.s
-.PHONY : perf/perf_optflowpyrlk.cpp.s
-
-perf/perf_tvl1optflow.o: perf/perf_tvl1optflow.cpp.o
-
-.PHONY : perf/perf_tvl1optflow.o
-
-# target to build an object file
-perf/perf_tvl1optflow.cpp.o:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_tvl1optflow.cpp.o
-.PHONY : perf/perf_tvl1optflow.cpp.o
-
-perf/perf_tvl1optflow.i: perf/perf_tvl1optflow.cpp.i
-
-.PHONY : perf/perf_tvl1optflow.i
-
-# target to preprocess a source file
-perf/perf_tvl1optflow.cpp.i:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_tvl1optflow.cpp.i
-.PHONY : perf/perf_tvl1optflow.cpp.i
-
-perf/perf_tvl1optflow.s: perf/perf_tvl1optflow.cpp.s
-
-.PHONY : perf/perf_tvl1optflow.s
-
-# target to generate assembly for a file
-perf/perf_tvl1optflow.cpp.s:
-	cd /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/opencv-2.4.13/SharedLibs && $(MAKE) -f modules/video/CMakeFiles/opencv_perf_video.dir/build.make modules/video/CMakeFiles/opencv_perf_video.dir/perf/perf_tvl1optflow.cpp.s
-.PHONY : perf/perf_tvl1optflow.cpp.s
 
 src/bgfg_gaussmix.o: src/bgfg_gaussmix.cpp.o
 
@@ -607,20 +511,10 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... package"
-	@echo "... opencv_perf_video"
 	@echo "... test"
 	@echo "... package_source"
 	@echo "... install/local"
 	@echo "... opencv_video"
-	@echo "... perf/perf_main.o"
-	@echo "... perf/perf_main.i"
-	@echo "... perf/perf_main.s"
-	@echo "... perf/perf_optflowpyrlk.o"
-	@echo "... perf/perf_optflowpyrlk.i"
-	@echo "... perf/perf_optflowpyrlk.s"
-	@echo "... perf/perf_tvl1optflow.o"
-	@echo "... perf/perf_tvl1optflow.i"
-	@echo "... perf/perf_tvl1optflow.s"
 	@echo "... src/bgfg_gaussmix.o"
 	@echo "... src/bgfg_gaussmix.i"
 	@echo "... src/bgfg_gaussmix.s"

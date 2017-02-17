@@ -1,7 +1,7 @@
 dependencies: \
-  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Builds/MacOSX/LookAndFeel.cpp \
-  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Builds/MacOSX/LookAndFeel.h \
-  ../../JuceLibraryCode/../JuceLibraryCode/JuceHeader.h \
+  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/LookAndFeel.cpp \
+  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/LookAndFeel.h \
+  /Users/aaronkarp/Documents/Research/Summer2016/GraphingPad/EQTouch/Audealize-EQ/Source/../JuceLibraryCode/JuceHeader.h \
   ../../JuceLibraryCode/AppConfig.h \
   ../../../../../../../../Downloads/JUCE/modules/juce_audio_basics/juce_audio_basics.h \
   ../../../../../../../../Downloads/JUCE/modules/juce_core/juce_core.h \

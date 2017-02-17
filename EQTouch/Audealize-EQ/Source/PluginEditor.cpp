@@ -85,9 +85,9 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     cv::flip(tempframe, tempframe, -1);
     //Check button position
     frame = tempframe(cv::Rect(100, 120, tempframe.cols - 100, tempframe.rows - 120));
-    frame(cv::Rect(frame.cols-260,frame.rows-80,60,60)).copyTo(buttonFrame);
+    frame(cv::Rect(frame.cols-210,frame.rows-80,70,60)).copyTo(buttonFrame);
     imshow("Captured Image", frame);
-    //imshow("Button", buttonFrame);
+    imshow("Button", buttonFrame);
     bool button_detected = buttonDetected(buttonFrame);
     if (previousButtons.size() == 0)
         previousButtons = {button_detected};
@@ -114,19 +114,17 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
             param->setValueNotifyingHost(0.5f);
             param->endChangeGesture();
         }
-        cout << "Button Off" << endl;
         return;
     }
     //update the background model
     pMOG->operator()(frame, fgMaskMOG);
     //Calculations with colorThreshold
-    cv::Mat binaryMat = findChainByColor(frame);
-    cv::threshold(fgMaskMOG, binaryMat, 100, 255, cv::THRESH_BINARY);
+    cv::threshold(fgMaskMOG, findChainByColor(frame), 100, 255, cv::THRESH_BINARY);
     GaussianBlur(fgMaskMOG, fgMaskMOG, cv::Size(19,19), 1.5, 1.5);
     Canny(fgMaskMOG, fgMaskMOG, 0, 30, 3);
     
     
-    line(frame, cv::Point(frame.cols, frame.rows/2), cv::Point(0, frame.rows/2), Scalar(0,0,0), 1, 8, 0);
+    /*line(frame, cv::Point(frame.cols, frame.rows/2), cv::Point(0, frame.rows/2), Scalar(0,0,0), 1, 8, 0);
     line(frame, cv::Point(frame.cols, frame.rows/4), cv::Point(0, frame.rows/4), Scalar(0,0,0), 1, 8, 0);
     line(frame, cv::Point(frame.cols, 3*frame.rows/4), cv::Point(0, 3*frame.rows/4), Scalar(0,0,0), 1, 8, 0);
     line(frame, cv::Point(frame.cols/2, frame.rows), cv::Point(frame.cols/2, 0), Scalar(0,0,0), 1, 8, 0);
@@ -135,22 +133,22 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     
     
-    //imshow("Original", frame);
-    
+    imshow("Original", frame);
+    */
     //ArcLength Detection
     vector<vector<cv::Point> > contours;
     vector<Vec4i> hierarchy;
     Mat adjusted_contours(frame.rows, frame.cols, CV_8UC1, Scalar(255, 255,255));
     findContours(fgMaskMOG, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
     //imshow("Pre-Contours", fgMaskMOG);
-    double area0 = 0;
     RotatedRect box;
+    Point2f center, vtx[4];
+    float radius = 0;
+    double area0 = 0;
     for (unsigned int i=0; i<contours.size(); i++){
         // Find the minimum area enclosing bounding box
         box = minAreaRect(contours[i]);
         // Find the minimum area enclosing circle
-        Point2f center, vtx[4];
-        float radius = 0;
         minEnclosingCircle(contours[i], center, radius);
         box.points(vtx);
         /*// For small chain
@@ -174,16 +172,17 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
         if (hierarchy[i][3] < 0){
              area0 = arcLength(contours[i], false);
              if (area0 > 1600){
-                 
                  drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
              }
          }
+        /*
          else{
              area0 = arcLength(contours[i], true);
-             //if (area0 < 100){
-             //    drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
-             //}
+             if (area0 < 100){
+                 drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
+             }
          }
+         */
     }
     
     //imshow("adjusted_contours", adjusted_contours);
@@ -217,22 +216,28 @@ bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
     cvtColor(img, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
     Mat imgThresholded;
     inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
-    if(cv::sum(imgThresholded)[0] > 30)
+    if(cv::sum(imgThresholded)[0] > 30){
         return true;
-    iLowH = 120;
+    }
+    
+    //Change this to WHITE and take the inverse (or see if < x in conditional)
+    if (previousButtons.size() > 0 && previousButtons[previousButtons.size() - 1]){
+    iLowH = 0;
     iHighH = 179;
     
-    iLowS = 48;
-    iHighS = 163;
+    iLowS = 0;
+    iHighS = 41;
     
-    iLowV = 50;
-    iHighV = 200;
+    iLowV = 0;
+    iHighV = 255;
     imgHSV = Mat();
     cvtColor(img, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
     imgThresholded = Mat();
     inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
-    if(cv::sum(imgThresholded)[0] > 50)
+    if(cv::sum(imgThresholded)[0] < 50000){
         return true;
+    }
+    }
     
     vector<vector<cv::Point> > contours;
     vector<Vec4i> hierarchy;
@@ -427,11 +432,15 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
     
     //Taking average y at each frame and compare across time
     int num_interfered = 0;
+    int total = 0;
+    int num = 0;
+    int smallestY = height;
+    int biggestY = 0;
     for (int i=0; i < sortedPoints.size(); i++){
-        int total = 0;
-        int num = 0;
-        int smallestY = height;
-        int biggestY = 0;
+        total = 0;
+        num = 0;
+        smallestY = height;
+        biggestY = 0;
         for (int j=0; j < sortedPoints[i].size(); j++){
             if (sortedPoints[i][j] < smallestY)
                 smallestY = sortedPoints[i][j];

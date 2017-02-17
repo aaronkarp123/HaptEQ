@@ -397,6 +397,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\LookAndFeel.cpp">
+      <Filter>HaptEQ\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Biquad.cpp">
       <Filter>HaptEQ\Source\Effects</Filter>
     </ClCompile>
@@ -2292,6 +2295,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LookAndFeel.h">
+      <Filter>HaptEQ\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\NChannelFilter.h">
       <Filter>HaptEQ\Source\Effects</Filter>
     </ClInclude>

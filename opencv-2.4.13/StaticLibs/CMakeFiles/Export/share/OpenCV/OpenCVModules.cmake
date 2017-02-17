@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget zlib libtiff libjpeg libjasper libpng IlmImf opencv_core opencv_flann opencv_imgproc opencv_highgui opencv_features2d opencv_calib3d opencv_ml opencv_video opencv_legacy opencv_objdetect opencv_photo opencv_gpu opencv_ocl opencv_nonfree opencv_contrib opencv_stitching opencv_superres opencv_ts opencv_videostab)
+foreach(_expectedTarget zlib libtiff libjpeg libjasper libpng IlmImf opencv_core opencv_imgproc opencv_highgui opencv_video)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -67,59 +67,14 @@ add_library(IlmImf STATIC IMPORTED)
 # Create imported target opencv_core
 add_library(opencv_core STATIC IMPORTED)
 
-# Create imported target opencv_flann
-add_library(opencv_flann STATIC IMPORTED)
-
 # Create imported target opencv_imgproc
 add_library(opencv_imgproc STATIC IMPORTED)
 
 # Create imported target opencv_highgui
 add_library(opencv_highgui STATIC IMPORTED)
 
-# Create imported target opencv_features2d
-add_library(opencv_features2d STATIC IMPORTED)
-
-# Create imported target opencv_calib3d
-add_library(opencv_calib3d STATIC IMPORTED)
-
-# Create imported target opencv_ml
-add_library(opencv_ml STATIC IMPORTED)
-
 # Create imported target opencv_video
 add_library(opencv_video STATIC IMPORTED)
-
-# Create imported target opencv_legacy
-add_library(opencv_legacy STATIC IMPORTED)
-
-# Create imported target opencv_objdetect
-add_library(opencv_objdetect STATIC IMPORTED)
-
-# Create imported target opencv_photo
-add_library(opencv_photo STATIC IMPORTED)
-
-# Create imported target opencv_gpu
-add_library(opencv_gpu STATIC IMPORTED)
-
-# Create imported target opencv_ocl
-add_library(opencv_ocl STATIC IMPORTED)
-
-# Create imported target opencv_nonfree
-add_library(opencv_nonfree STATIC IMPORTED)
-
-# Create imported target opencv_contrib
-add_library(opencv_contrib STATIC IMPORTED)
-
-# Create imported target opencv_stitching
-add_library(opencv_stitching STATIC IMPORTED)
-
-# Create imported target opencv_superres
-add_library(opencv_superres STATIC IMPORTED)
-
-# Create imported target opencv_ts
-add_library(opencv_ts STATIC IMPORTED)
-
-# Create imported target opencv_videostab
-add_library(opencv_videostab STATIC IMPORTED)
 
 # Load information for each installed configuration.
 get_filename_component(_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
