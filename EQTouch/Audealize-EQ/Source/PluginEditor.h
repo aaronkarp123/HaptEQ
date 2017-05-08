@@ -42,7 +42,8 @@ public:
     cv::Mat getBinaryMat(cv::Mat&);
     cv::Mat getCannyMat(cv::Mat&);
     cv::Mat findChainByColor(cv::Mat&);
-    cv::Mat getEQPointsMat(cv::Mat&, cv::Mat&);
+    
+    vector<float> visualProcessing();
     
     bool buttonDetected(cv::Mat&);
     
@@ -74,6 +75,8 @@ private:
     std::deque<bool> previousButtons;
     
     int num_times_run;
+    
+    int frame_num;
     
     String filename = "/Users/aaronkarp/Documents/Research/Summer2016/GraphingPad";
     

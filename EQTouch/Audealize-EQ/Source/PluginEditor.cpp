@@ -14,6 +14,8 @@
 #include <opencv2/video/video.hpp>
 #include <vector>
 #include <deque>
+#include <unistd.h>
+
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -36,7 +38,10 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
     }
     LookAndFeel::setDefaultLookAndFeel (&lookAndFeel);
 
-    cap = VideoCapture(1);
+    cap = VideoCapture(0);
+    std::cout << cap.get(CV_CAP_PROP_FRAME_WIDTH)<< endl;
+    std::cout << cap.get(CV_CAP_PROP_FRAME_HEIGHT)<< endl;
+    
     buttonFrame = cv::Mat();
     
     pMOG = new cv::BackgroundSubtractorMOG(200, 5, 0.7, 0);
@@ -47,17 +52,18 @@ AudealizeeqAudioProcessorEditor::AudealizeeqAudioProcessorEditor (AudealizeeqAud
     
     startTimerHz(60);
     
+    frame_num = 0;
+    
     previousMidpoints = {};
     
     previous_midpoints = {} ;
     
     previousButtons = {};
     
-    //outCapture = cv::VideoWriter(filename, CV_FOURCC('M','J','P','G'), 30, cv::Size(1989,1680));
-    
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (800, 200);
+
 }
 
 AudealizeeqAudioProcessorEditor::~AudealizeeqAudioProcessorEditor()
@@ -75,19 +81,47 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
     
     g.setColour (Colours::white);
     
-    if(!cap.isOpened()){  // check if we succeeded
-        cap = VideoCapture(1);
+    // Do all the visual processing
+    // TODO: Change to multithreaded
+    vector<float> midpointVec = visualProcessing();
+    
+    if (midpointVec.size() <= 0){
+        cout << "Not Detected" << endl;
         return;
+    }
+    for (int i = 0; i < 40; i++){
+        AudioProcessorParameter* param = processor.getValueTreeState().getParameter(processor.getParamID(i));
+        param->beginChangeGesture();
+        float delta = midpointVec[i];
+        param->setValueNotifyingHost(delta);
+        param->endChangeGesture();
+    }
+    
+}
+
+vector<float> AudealizeeqAudioProcessorEditor::visualProcessing(){
+    frame_num += 1;
+    
+    vector<float> to_return;
+    
+    if(!cap.isOpened()){  // check if camera is succesfully opened
+        cap = VideoCapture(1);
+        return to_return;
     }
     
     cv::Mat tempframe;
     cap >> tempframe;
     cv::flip(tempframe, tempframe, -1);
+    cv::resize(tempframe, tempframe, cv::Size(cap.get(CV_CAP_PROP_FRAME_WIDTH)/4, cap.get(CV_CAP_PROP_FRAME_HEIGHT)/4));
+    //imshow("tempframe", tempframe);
+    
     //Check button position
-    frame = tempframe(cv::Rect(100, 120, tempframe.cols - 100, tempframe.rows - 120));
+    frame = tempframe(cv::Rect(100, 20, tempframe.cols - 100, tempframe.rows - 20));
     frame(cv::Rect(frame.cols-210,frame.rows-80,70,60)).copyTo(buttonFrame);
+    
     imshow("Captured Image", frame);
-    imshow("Button", buttonFrame);
+    //imshow("Button", buttonFrame);
+    
     bool button_detected = buttonDetected(buttonFrame);
     if (previousButtons.size() == 0)
         previousButtons = {button_detected};
@@ -107,6 +141,7 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
         button_detected = true;
     else
         button_detected = false;
+    button_detected = true; //ONLY FOR TESTING
     if (!button_detected){
         for (int i = 0; i < 40; i++){
             AudioProcessorParameter* param = processor.getValueTreeState().getParameter(processor.getParamID(i));
@@ -114,93 +149,73 @@ void AudealizeeqAudioProcessorEditor::paint (Graphics& g)
             param->setValueNotifyingHost(0.5f);
             param->endChangeGesture();
         }
-        return;
+        return to_return;
     }
+    
     //update the background model
+    if (frame_num == 1){
+        Mat tempBack;
+        tempBack = imread( "/Users/aaronkarp/Desktop/images/background.jpg", 1 );
+        if(!tempBack.data )
+        {
+            std::cout << "write new image" << std::endl;
+            imwrite( "/Users/aaronkarp/Desktop/images/background.jpg", frame );
+        }
+        else{
+            std::cout << "using old image" << std::endl;
+            frame = tempBack;
+        }
+    }
     pMOG->operator()(frame, fgMaskMOG);
-    //Calculations with colorThreshold
     cv::threshold(fgMaskMOG, findChainByColor(frame), 100, 255, cv::THRESH_BINARY);
     GaussianBlur(fgMaskMOG, fgMaskMOG, cv::Size(19,19), 1.5, 1.5);
     Canny(fgMaskMOG, fgMaskMOG, 0, 30, 3);
     
+    imshow("foreground", frame);
     
-    /*line(frame, cv::Point(frame.cols, frame.rows/2), cv::Point(0, frame.rows/2), Scalar(0,0,0), 1, 8, 0);
-    line(frame, cv::Point(frame.cols, frame.rows/4), cv::Point(0, frame.rows/4), Scalar(0,0,0), 1, 8, 0);
-    line(frame, cv::Point(frame.cols, 3*frame.rows/4), cv::Point(0, 3*frame.rows/4), Scalar(0,0,0), 1, 8, 0);
-    line(frame, cv::Point(frame.cols/2, frame.rows), cv::Point(frame.cols/2, 0), Scalar(0,0,0), 1, 8, 0);
-        line(frame, cv::Point(frame.cols/4, frame.rows), cv::Point(frame.cols/4, 0), Scalar(0,0,0), 1, 8, 0);
-        line(frame, cv::Point(3*frame.cols/4, frame.rows), cv::Point(3*frame.cols/4, 0), Scalar(0,0,0), 1, 8, 0);
-    
-    
-    
-    imshow("Original", frame);
-    */
     //ArcLength Detection
     vector<vector<cv::Point> > contours;
     vector<Vec4i> hierarchy;
     Mat adjusted_contours(frame.rows, frame.cols, CV_8UC1, Scalar(255, 255,255));
     findContours(fgMaskMOG, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, cv::Point(0,0));
+    
     //imshow("Pre-Contours", fgMaskMOG);
-    RotatedRect box;
-    Point2f center, vtx[4];
+    
+    Point2f center;
     float radius = 0;
     double area0 = 0;
     for (unsigned int i=0; i<contours.size(); i++){
-        // Find the minimum area enclosing bounding box
-        box = minAreaRect(contours[i]);
-        // Find the minimum area enclosing circle
         minEnclosingCircle(contours[i], center, radius);
-        box.points(vtx);
+        
         /*// For small chain
-        if (radius < 50)
+         if (radius < 50)
+         drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
+         else
+         if (hierarchy[i][3] < 0){
+         area0 = arcLength(contours[i], false);
+         if (area0 < 200){
+         
+         drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
+         }
+         //else
+         //    drawContours(adjusted_contours, contours, i, Scalar(100,100,100), 2, 10);
+         }
+         //else
+         //   drawContours(adjusted_contours, contours, i, Scalar(100,100,100), 2, 10);*/
+        
+        // For large chain
+        if (radius > 1000)
             drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
         else
             if (hierarchy[i][3] < 0){
                 area0 = arcLength(contours[i], false);
-                if (area0 < 200){
-                
+                if (area0 > 1600){
                     drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
                 }
-                //else
-                //    drawContours(adjusted_contours, contours, i, Scalar(100,100,100), 2, 10);
             }
-            //else
-            //   drawContours(adjusted_contours, contours, i, Scalar(100,100,100), 2, 10);*/
-        // For large chain
-        if (radius > 1000)
-            drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
-        if (hierarchy[i][3] < 0){
-             area0 = arcLength(contours[i], false);
-             if (area0 > 1600){
-                 drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
-             }
-         }
-        /*
-         else{
-             area0 = arcLength(contours[i], true);
-             if (area0 < 100){
-                 drawContours(adjusted_contours, contours, i, Scalar(0,0,0), 2, 8);
-             }
-         }
-         */
     }
-    
-    //imshow("adjusted_contours", adjusted_contours);
-    vector<float> midpointVec = getEQPointsVec(adjusted_contours, frame);
-    if (midpointVec.size() <= 0){
-        cout << "No Midpoints" << endl;
-        return;
-    }
-    for (int i = 0; i < 40; i++){
-        AudioProcessorParameter* param = processor.getValueTreeState().getParameter(processor.getParamID(i));
-        param->beginChangeGesture();
-        float delta = midpointVec[i];
-        param->setValueNotifyingHost(delta);
-        param->endChangeGesture();
-        circle(adjusted_contours, cv::Point(i * (frame.cols % 40), delta), 5, Scalar( 255, 0, 0 ));
-    }
-    
-    //waitKey(15);
+    to_return = getEQPointsVec(adjusted_contours, frame);
+    return to_return;
 }
 
 bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
@@ -226,7 +241,7 @@ bool AudealizeeqAudioProcessorEditor::buttonDetected(cv::Mat& img){
     iHighH = 179;
     
     iLowS = 0;
-    iHighS = 41;
+    iHighS = 61;
     
     iLowV = 0;
     iHighV = 255;
@@ -340,18 +355,9 @@ cv::Mat AudealizeeqAudioProcessorEditor::findChainByColor(cv::Mat& imgOriginal)
     int iLowV = 0;
     int iHighV = 255;
     
-    /*//Aaron's Hand
-     LowH: 0  HighH: 179
-     LowS: 48  HighS: 163
-     LowV: 50  HighV: 255
-     */
-    Mat imgHSV;
+    cvtColor(imgOriginal, imgOriginal, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
     
-    cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
-    
-    Mat imgThresholded;
-    
-    inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
+    inRange(imgOriginal, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgOriginal); //Threshold the image
     
     /*//Useful for blocks, not for chain detection
      //morphological opening (remove small objects from the foreground)
@@ -362,7 +368,8 @@ cv::Mat AudealizeeqAudioProcessorEditor::findChainByColor(cv::Mat& imgOriginal)
      dilate( imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)) );
      erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, cv::Size(5, 5)) );
      */
-    return imgThresholded;
+    
+    return imgOriginal;
 }
 
 vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat, cv::Mat& img)
@@ -386,49 +393,6 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
     
     vector<cv::Point> midpoints;
     int xVal = 0;
-    
-    /*//USE IFF CAMERA FRAMERATE IS HIGH
-     if (previousMidpoints.size() != 0)
-     for (int i=0; i < sortedPoints.size(); i++){
-     int total = 0;
-     int num = 0;
-     int smallestY = 0;//height;
-     int biggestY = 0;
-     for (int j=0; j < sortedPoints[i].size(); j++){
-     if (sortedPoints[i][j] < smallestY)
-     smallestY = sortedPoints[i][j];
-     if (sortedPoints[i][j] > biggestY)
-     biggestY = sortedPoints[i][j];
-     
-     
-     if (previousMidpoints.size() == 0){
-     ++num;
-     total+=sortedPoints[i][j];
-     }
-     else
-     {
-     if (abs(sortedPoints[i][j] - previousMidpoints[i].y) <= 40){
-     ++num;
-     total+=sortedPoints[i][j];
-     }
-     }
-     }
-     //Detecting vertical interference
-     if (abs(biggestY - smallestY) > 100){
-     if (previousMidpoints.size() == 0){
-     vector<float> empty = {};
-     return empty;
-     }
-     midpoints.push_back(previousMidpoints[i]);
-     }
-     else
-     if (num != 0){
-     midpoints.push_back(cv::Point(xVal, int(total/num)));
-     }
-     ++xVal;
-     }
-     else*/
-    
     
     //Taking average y at each frame and compare across time
     int num_interfered = 0;
@@ -465,10 +429,6 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
                 midpoints.push_back(previousMidpoints[i]);
             }
         }
-        /*else if (previous_midpoints.size() > 2 && i > 0 && abs(midpoints.back().y - total/num) > 200){
-            midpoints.push_back(cv::Point(xVal, midpoints.back().y));//int((midpoints.back().y * 15 + total/num )) / 16));
-            cout << xVal << endl;
-        }*/
         else if (num != 0){
             float avg = float(total/num);
             for (int j=0; j < previous_midpoints.size(); j++){
@@ -480,50 +440,8 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
         ++xVal;
     }
     
-    
-    /*
-     //Taking max y at each frame and compare across space
-     for (int i=0; i < sortedPoints.size(); i++){
-     int total = 0;
-     int num = 0;
-     int smallestY = height;
-     int biggestY = 0;
-     for (int j=0; j < sortedPoints[i].size(); j++){
-     if (sortedPoints[i][j] < smallestY)
-     smallestY = sortedPoints[i][j];
-     if (sortedPoints[i][j] > biggestY)
-     biggestY = sortedPoints[i][j];
-     ++num;
-     total+=sortedPoints[i][j];
-     }
-     
-     //Detecting vertical interference
-     if (abs(biggestY - smallestY) > 100){
-     if (previousMidpoints.size() == 0){
-     vector<float> empty = {};
-     std::cout << "here";
-     return empty;
-     }
-     midpoints.push_back(previousMidpoints[i]);
-     }
-     else if (num != 0){
-     if (i > 0){
-     if (abs(midpoints[i-1].y - biggestY) > 5)
-     midpoints.push_back(previousMidpoints[i]);
-     else{
-     midpoints.push_back(cv::Point(xVal, biggestY));
-     }
-     }
-     else{
-     midpoints.push_back(cv::Point(xVal, biggestY));
-     }
-     }
-     ++xVal;
-     }
-     */
-    
     vector<float> finalMidpoints;
-    int delta_x = 165;
+    int delta_x = 10;
     int mod40 = int((midpoints.size()-2*delta_x)/40);
     for (int i=delta_x; i < midpoints.size() - delta_x; i++){
         if (i % mod40 == 0){
@@ -541,54 +459,9 @@ vector<float> AudealizeeqAudioProcessorEditor::getEQPointsVec(cv::Mat& binaryMat
         previous_midpoints = {tempVec};
     else
         previous_midpoints.push_front(tempVec);
-    if(previous_midpoints.size() > 3    )  // # of previous midpoints to average together
+    if(previous_midpoints.size() > 3 )  // # of previous midpoints to average together
         previous_midpoints.pop_back();
     return finalMidpoints;
-}
-
-cv::Mat AudealizeeqAudioProcessorEditor::getEQPointsMat(cv::Mat& binaryMat, cv::Mat& img)
-{
-    vector<cv::Point> nonZeroCoordinates;
-    
-    for (int i = 0; i < binaryMat.cols; i++ ) {
-        for (int j = 0; j < binaryMat.rows; j++) {
-            if (binaryMat.at<uchar>(j, i) == 0) {
-                nonZeroCoordinates.push_back(cv::Point(i, j));
-            }
-        }
-    }
-    
-    vector< vector< int> > sortedPoints(img.cols);
-    for (int i = 0; i < nonZeroCoordinates.size(); i++) {
-        sortedPoints[nonZeroCoordinates[i].x].push_back(nonZeroCoordinates[i].y);
-    }
-    
-    vector<cv::Point> midpoints(img.cols);
-    int xVal = 0;
-    for (int i=0; i < sortedPoints.size(); i++){
-        int total = 0;
-        int num = 0;
-        for (int j=0; j < sortedPoints[i].size(); j++){
-            ++num;
-            total+=sortedPoints[i][j];
-        }
-        if (num != 0){
-            midpoints.push_back(cv::Point(xVal, int(total/num)));
-        }
-        ++xVal;
-    }
-    
-    Mat midpointImg(img.rows, img.cols, CV_8UC1);
-    int mod40 = int(img.cols/40);
-    for (int i=0; i < midpoints.size(); i++){
-        if (midpoints[i].x % mod40 == 0){
-            circle(midpointImg, midpoints[i], 5, Scalar( 255, 0, 0 ));
-        }
-        else
-            circle(midpointImg, midpoints[i], 1, Scalar( 255, 0, 0 ));
-    }
-    return midpointImg;
-    
 }
 
 void AudealizeeqAudioProcessorEditor::timerCallback()
