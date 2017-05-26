@@ -10,8 +10,7 @@
 
 */
 
-#ifndef __APPHEADERFILE_X1TFUX__
-#define __APPHEADERFILE_X1TFUX__
+#pragma once
 
 #include "AppConfig.h"
 
@@ -46,5 +45,3 @@ namespace ProjectInfo
     const int          versionNumber  = 0x1;
 }
 #endif
-
-#endif   // __APPHEADERFILE_X1TFUX__
